@@ -64,14 +64,14 @@ npm run preview
 The Node test suite covers API health, administrator session protections, login cookie flags, enquiry validation, and HTTPS URL validation. MongoDB-backed CRUD and persistence tests require a configured MongoDB server.
 
 ## Deployment
-The repository includes deployment configuration for Netlify (frontend) and Render (Express API). Use a managed MongoDB service and restrict its network access. Netlify proxies `/api/*` through a function, so API requests and the administrator's `SameSite=Strict` session cookie remain same-origin; do not set `VITE_API_URL` on Netlify.
+The repository includes deployment configuration for Netlify (frontend) and Render (Express API). Use a managed MongoDB service and restrict its network access. Netlify proxies `/api/*` through a function, so API requests and the administrator's `SameSite=Strict` session cookie remain same-origin; do not set `VITE_API_URL` on Netlify. The function defaults to `https://code-pixel-webapp.onrender.com`; set Netlify's optional `API_URL` variable only if you need to override that backend.
 
 ### Deploy the API to Render
 1. In Netlify, import this repository. The checked-in `netlify.toml` sets `npm run build`, publishes `dist`, and provides the SPA fallback for deep links. Deploy once to obtain the site's origin, such as `https://your-site.netlify.app`.
 2. Create a MongoDB database and copy its connection string.
 3. In Render, create a Blueprint from this repository and apply `render.yaml`. Set the prompted environment values: `MONGODB_URI`, `ADMIN_EMAIL`, `ADMIN_PASSWORD` (at least 12 characters), and `CLIENT_ORIGIN` (the exact Netlify site origin). Render generates `JWT_SECRET`; keep it private.
 4. Wait for the Render service to become healthy at `/api/health` and note its HTTPS origin, such as `https://code-pixel-api.onrender.com`.
-5. In Netlify's environment variables, set `API_URL` to the Render API origin only (no `/api` suffix). Do not prefix it with `VITE_`. Redeploy the Netlify site so the function can reach the API.
+5. Redeploy the Netlify site. No API URL environment variable is needed unless you want to override the configured Render backend; if so, set `API_URL` to the API origin only (no `/api` suffix).
 6. Run `npm run db:seed` once against the production `MONGODB_URI` from a trusted local environment, or run it in the Render shell if available. The seed is insert-only and preserves existing records.
 
 Keep database credentials and secrets only in the relevant host environment variables—never commit `.env` or expose secrets as frontend `VITE_` variables. For a custom domain, update Render's `CLIENT_ORIGIN` to the exact frontend origin.

@@ -2,6 +2,8 @@ export const config = {
   path: '/api/*'
 }
 
+const defaultApiOrigin = 'https://code-pixel-webapp.onrender.com'
+
 const hopByHopHeaders = [
   'connection',
   'content-encoding',
@@ -17,10 +19,7 @@ const hopByHopHeaders = [
 ]
 
 export default async function handler(request) {
-  const apiOrigin = process.env.API_URL
-  if (!apiOrigin) {
-    return Response.json({ error: 'API_URL is not configured for the Netlify function' }, { status: 500 })
-  }
+  const apiOrigin = process.env.API_URL || defaultApiOrigin
 
   let upstreamUrl
   try {
