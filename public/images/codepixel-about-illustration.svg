@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1417" height="768" viewBox="0 0 1417 768" fill="none">
+  <defs>
+    <linearGradient id="background" x1="140" y1="70" x2="1263" y2="718" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172641"/>
+      <stop offset=".52" stop-color="#0D192D"/>
+      <stop offset="1" stop-color="#101A30"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="476" y1="193" x2="968" y2="480" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14213A"/>
+      <stop offset="1" stop-color="#0A1426"/>
+    </linearGradient>
+    <linearGradient id="brand" x1="467" y1="202" x2="953" y2="493" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#783BFF"/>
+      <stop offset=".55" stop-color="#267BFF"/>
+      <stop offset="1" stop-color="#00D5E8"/>
+    </linearGradient>
+    <linearGradient id="laptopBase" x1="716" y1="504" x2="716" y2="549" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#74839D"/>
+      <stop offset=".38" stop-color="#35445F"/>
+      <stop offset="1" stop-color="#17243A"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientTransform="matrix(0 354 -594 0 716 383)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#267BFF" stop-opacity=".25"/>
+      <stop offset=".55" stop-color="#783BFF" stop-opacity=".11"/>
+      <stop offset="1" stop-color="#070B18" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="293" y="91" width="848" height="590" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" result="hardAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+      <feOffset dy="22"/>
+      <feGaussianBlur stdDeviation="24"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix values="0 0 0 0 0.01 0 0 0 0 0.03 0 0 0 0 0.09 0 0 0 0.7 0"/>
+      <feBlend in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <clipPath id="screenClip">
+      <rect x="398" y="166" width="636" height="344" rx="14"/>
+    </clipPath>
+  </defs>
+  <rect width="1417" height="768" rx="18" fill="url(#background)"/>
+  <ellipse cx="716" cy="383" rx="594" ry="354" fill="url(#halo)"/>
+  <circle cx="716" cy="380" r="283" stroke="#783BFF" stroke-opacity=".23"/>
+  <circle cx="716" cy="380" r="321" stroke="#00D5E8" stroke-opacity=".13" stroke-dasharray="4 14"/>
+  <path d="M90 607C281 540 330 529 453 532M964 538c137 2 216 27 361 76" stroke="#267BFF" stroke-opacity=".24" stroke-width="2" stroke-dasharray="3 12"/>
+  <g filter="url(#shadow)">
+    <rect x="373" y="137" width="686" height="394" rx="24" fill="#192842" stroke="#71819A" stroke-opacity=".58" stroke-width="2"/>
+    <rect x="398" y="166" width="636" height="344" rx="14" fill="url(#screen)" stroke="#52617A"/>
+    <g clip-path="url(#screenClip)">
+      <rect x="398" y="166" width="636" height="37" fill="#1B2A42"/>
+      <circle cx="420" cy="184.5" r="4" fill="#783BFF"/>
+      <circle cx="434" cy="184.5" r="4" fill="#267BFF"/>
+      <circle cx="448" cy="184.5" r="4" fill="#00D5E8"/>
+      <text x="952" y="188" fill="#8796AD" font-family="Arial,sans-serif" font-size="9" letter-spacing="1.5">CODEPIXEL / DIGITAL STUDIO</text>
+
+      <rect x="398" y="203" width="57" height="307" fill="#0C1627"/>
+      <rect x="417" y="220" width="21" height="21" rx="6" fill="url(#brand)"/>
+      <path d="M422 226h11M422 231h11M422 236h8" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="427.5" cy="269.5" r="5.5" fill="#465875"/>
+      <circle cx="427.5" cy="298.5" r="5.5" fill="#465875"/>
+      <circle cx="427.5" cy="327.5" r="5.5" fill="#465875"/>
+      <circle cx="427.5" cy="356.5" r="5.5" fill="#465875"/>
+      <rect x="416" y="377" width="23" height="23" rx="7" fill="#783BFF" fill-opacity=".25"/>
+      <path d="M422 388.5h11m-5.5-5.5v11" stroke="#C1A9FF" stroke-width="1.5" stroke-linecap="round"/>
+
+      <rect x="455" y="203" width="579" height="307" fill="#101B2E"/>
+      <text x="481" y="236" fill="#8C9BB2" font-family="Arial,sans-serif" font-size="9" letter-spacing="1.5">A THOUGHTFUL DIGITAL WORKFLOW</text>
+      <text x="481" y="271" fill="#F8FAFF" font-family="Arial,sans-serif" font-size="23" font-weight="700">Ideas, shaped into experiences.</text>
+      <text x="481" y="292" fill="#9EACC1" font-family="Arial,sans-serif" font-size="11">A clear path from understanding a need to building a useful product.</text>
+
+      <rect x="481" y="316" width="164" height="137" rx="10" fill="#172640" stroke="#34445F"/>
+      <rect x="497" y="333" width="31" height="31" rx="9" fill="#783BFF" fill-opacity=".2"/>
+      <path d="M507 348h11m-5.5-5.5v11" stroke="#C2A8FF" stroke-width="2" stroke-linecap="round"/>
+      <text x="497" y="386" fill="#F8FAFF" font-family="Arial,sans-serif" font-size="13" font-weight="700">Discover</text>
+      <text x="497" y="405" fill="#A5B1C5" font-family="Arial,sans-serif" font-size="10">Start with people</text>
+      <rect x="497" y="423" width="91" height="4" rx="2" fill="#34445F"/>
+      <rect x="497" y="423" width="57" height="4" rx="2" fill="#783BFF"/>
+
+      <path d="M649 385h22" stroke="url(#brand)" stroke-width="2" stroke-linecap="round"/>
+      <path d="m667 380 6 5-6 5" stroke="#267BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="677" y="316" width="164" height="137" rx="10" fill="#172640" stroke="#34445F"/>
+      <rect x="693" y="333" width="31" height="31" rx="9" fill="#267BFF" fill-opacity=".2"/>
+      <path d="m701 349 5 5 10-11" stroke="#75B3FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="693" y="386" fill="#F8FAFF" font-family="Arial,sans-serif" font-size="13" font-weight="700">Design</text>
+      <text x="693" y="405" fill="#A5B1C5" font-family="Arial,sans-serif" font-size="10">Make it considered</text>
+      <rect x="693" y="423" width="91" height="4" rx="2" fill="#34445F"/>
+      <rect x="693" y="423" width="69" height="4" rx="2" fill="#267BFF"/>
+
+      <path d="M845 385h22" stroke="url(#brand)" stroke-width="2" stroke-linecap="round"/>
+      <path d="m863 380 6 5-6 5" stroke="#00D5E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="873" y="316" width="141" height="137" rx="10" fill="#172640" stroke="#34445F"/>
+      <rect x="889" y="333" width="31" height="31" rx="9" fill="#00D5E8" fill-opacity=".16"/>
+      <path d="M897 348h15m-15 5h10" stroke="#68E7F0" stroke-width="2" stroke-linecap="round"/>
+      <text x="889" y="386" fill="#F8FAFF" font-family="Arial,sans-serif" font-size="13" font-weight="700">Build</text>
+      <text x="889" y="405" fill="#A5B1C5" font-family="Arial,sans-serif" font-size="10">Ready to grow</text>
+      <rect x="889" y="423" width="91" height="4" rx="2" fill="#34445F"/>
+      <rect x="889" y="423" width="82" height="4" rx="2" fill="#00D5E8"/>
+    </g>
+    <circle cx="716" cy="151" r="3" fill="#7B8BA5"/>
+    <path d="m310 533 812 0-68 54H378l-68-54Z" fill="url(#laptopBase)" stroke="#8491A5" stroke-opacity=".65"/>
+    <path d="M378 587h676l-31 13H409l-31-13Z" fill="#101A2B" stroke="#52617A"/>
+    <path d="M680 540h72l-8 7h-56l-8-7Z" fill="#1C2940" stroke="#78879E" stroke-opacity=".55"/>
+    <path d="M445 549h540M416 559h599M389 570h654" stroke="#A6B2C7" stroke-opacity=".16"/>
+  </g>
+
+  <g>
+    <rect x="122" y="226" width="142" height="172" rx="16" fill="#101A30" stroke="#34445F"/>
+    <rect x="143" y="247" width="100" height="91" rx="8" fill="#172640"/>
+    <path d="M158 315v-23l17-14 16 11 19-24 19 18" stroke="#00D5E8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="143" y="352" width="62" height="5" rx="2.5" fill="#783BFF"/>
+    <rect x="143" y="365" width="79" height="4" rx="2" fill="#465875"/>
+    <text x="143" y="388" fill="#A5B1C5" font-family="Arial,sans-serif" font-size="8" letter-spacing="1">PRODUCT THINKING</text>
+
+    <rect x="1147" y="254" width="151" height="174" rx="16" fill="#101A30" stroke="#34445F"/>
+    <circle cx="1186" cy="296" r="18" fill="#783BFF" fill-opacity=".25"/>
+    <circle cx="1222" cy="296" r="18" fill="#267BFF" fill-opacity=".25"/>
+    <circle cx="1258" cy="296" r="18" fill="#00D5E8" fill-opacity=".2"/>
+    <path d="M1179 298c0-5 4-9 9-9s9 4 9 9m-18 0v5h18v-5m16-2a7 7 0 1 1 14 0m-16 7h18m11-10v10m-5-5h10" stroke="#D8E2F3" stroke-width="1.5" stroke-linecap="round"/>
+    <rect x="1167" y="334" width="112" height="5" rx="2.5" fill="#465875"/>
+    <rect x="1167" y="334" width="72" height="5" rx="2.5" fill="url(#brand)"/>
+    <text x="1167" y="363" fill="#F8FAFF" font-family="Arial,sans-serif" font-size="11" font-weight="700">People first</text>
+    <text x="1167" y="382" fill="#A5B1C5" font-family="Arial,sans-serif" font-size="9">Thoughtful collaboration</text>
+    <rect x="1167" y="398" width="75" height="4" rx="2" fill="#34445F"/>
+
+    <circle cx="326" cy="231" r="24" fill="#101A30" stroke="#34445F"/>
+    <path d="m316 231 7 7 14-15" stroke="#00D5E8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="1096" cy="516" r="27" fill="#101A30" stroke="#34445F"/>
+    <path d="M1085 516h22m-11-11v22" stroke="#A88AFF" stroke-width="2.5" stroke-linecap="round"/>
+    <rect x="281" y="492" width="8" height="8" rx="2" fill="#00D5E8"/>
+    <rect x="1117" y="473" width="7" height="7" rx="2" fill="#783BFF"/>
+    <rect x="1067" y="195" width="9" height="9" rx="2" fill="#267BFF"/>
+  </g>
+</svg>

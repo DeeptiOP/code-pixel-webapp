@@ -1,0 +1,80 @@
+export const services = [
+  {
+    id: 'website',
+    name: 'Website Development',
+    description: 'Build a clear, responsive online presence that introduces your brand and turns visits into conversations.',
+    examples: ['Personal portfolio', 'Small business website', 'Corporate website', 'Restaurant website', 'Campaign landing page', 'Agency website'],
+    features: ['Mobile-first responsive layouts', 'Contact and inquiry forms', 'SEO-ready page structure', 'Custom sections and interactions'],
+    visualIndex: 0,
+    image: '/images/website-development-reference.png',
+    imageAlt: 'Fashion storefront reference showing product listings, a product detail page and a shopping cart',
+    imageCaption: 'Illustrative website design reference · not a completed client project',
+    imageIsProject: false,
+    bestFor: 'Individuals, local businesses and teams that need a professional website.'
+  },
+  {
+    id: 'application',
+    name: 'Web Application Development',
+    description: 'Create a browser-based product that helps customers or teams complete useful workflows.',
+    examples: ['Task management application', 'CRM system', 'Employee management system', 'Booking application', 'Business management dashboard'],
+    features: ['Purpose-built user workflows', 'Database-backed CRUD features', 'Authentication and dashboards by package', 'Responsive application interface'],
+    visualIndex: 1,
+    image: '/images/web-application-development-reference.png',
+    imageAlt: 'CRM web application dashboard showing sales metrics, activity, customer analytics, and charts',
+    imageCaption: 'Illustrative CRM dashboard reference · not a completed client project',
+    imageIsProject: false,
+    bestFor: 'Startups and small teams validating an idea or digitizing a repeatable workflow.'
+  },
+  {
+    id: 'ecommerce',
+    name: 'E-commerce Development',
+    description: 'Give customers a convenient way to discover products, add them to a cart and place an order.',
+    examples: ['Fashion shopping store', 'Electronics store', 'Grocery shopping platform', 'Product listings and details', 'Cart and checkout', 'Store admin dashboard'],
+    features: ['Product catalog and detail pages', 'Responsive cart and checkout flow', 'Catalog and order tools by package', 'Payment integration available in scoped plans'],
+    visualIndex: 2,
+    image: '/images/printeeq-store.jpg',
+    imageAlt: 'PrinTeeQ live e-commerce store portfolio screenshot',
+    imageCaption: 'Portfolio screenshot · PrinTeeQ online store',
+    imageIsProject: true,
+    bestFor: 'Small retailers and brands setting up or improving an online storefront.'
+  },
+  {
+    id: 'backend',
+    name: 'Backend & API Development',
+    description: 'Connect application interfaces to structured data, secure business rules and external services.',
+    examples: ['REST API architecture', 'Authentication API', 'Database architecture', 'Payment integration', 'Notification API'],
+    features: ['CRUD endpoints and data models', 'Validation and error handling by package', 'Authentication and role-based access by scope', 'API integrations agreed before development'],
+    visualIndex: 3,
+    image: '/images/backend-api-architecture-reference.png',
+    imageAlt: 'REST API architecture diagram connecting a client, API service, and database with JSON data and HTTP methods',
+    imageCaption: 'Illustrative backend and API architecture · not a completed client project',
+    imageIsProject: false,
+    bestFor: 'Product teams that need an API, database workflows or backend support for an existing app.'
+  },
+  {
+    id: 'dashboard',
+    name: 'Admin Dashboard & Management Systems',
+    description: 'Bring day-to-day business records and operations into a clear, manageable workspace.',
+    examples: ['Sales dashboard', 'Employee management dashboard', 'Inventory management dashboard', 'HR dashboard', 'Business analytics dashboard'],
+    features: ['Readable data tables and summaries', 'Search, filters and CRUD by package', 'Charts and reports by package', 'Roles and workflows in advanced scopes'],
+    visualIndex: 4,
+    image: '/images/admin-dashboard-reference.png',
+    imageAlt: 'Employee management dashboard reference showing attendance, workforce statistics, reports, and employee status',
+    imageCaption: 'Illustrative employee dashboard reference · not a completed client project',
+    imageIsProject: false,
+    bestFor: 'Small businesses that want to organize records, track activity or simplify internal tasks.'
+  },
+  {
+    id: 'maintenance',
+    name: 'Website Maintenance',
+    description: 'Keep an existing website current, checked and supported with a clearly limited monthly allowance.',
+    examples: ['Minor content updates', 'Routine bug fixes', 'Website health checks', 'Backup and security checks', 'Performance monitoring'],
+    features: ['Clearly capped monthly maintenance hours', 'Defined support response windows', 'Monitoring and reporting by package', 'Extra work agreed and quoted before it starts'],
+    visualIndex: 7,
+    image: null,
+    imageAlt: '',
+    imageCaption: 'Illustrative website monitoring preview · not a client project screenshot',
+    imageIsProject: false,
+    bestFor: 'Owners who want predictable, limited monthly help for an existing website.'
+  }
+]
