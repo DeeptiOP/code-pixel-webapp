@@ -54,6 +54,19 @@ function PageIntro() {
   </motion.div>}</AnimatePresence>
 }
 
+function ScrollProgress({ value }) {
+  return <div
+    className="scroll-progress"
+    role="progressbar"
+    aria-label="Page scroll progress"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow={Math.round(value)}
+  >
+    <span style={{ transform: `scaleX(${value / 100})` }}/>
+  </div>
+}
+
 function ServiceVisual({ index, title, image, imageAlt }) {
   const Icon = [Globe2, LayoutDashboard, ShoppingCart, Workflow, Activity, Code2, Palette, Wrench][index]
   return <div className={`service-visual service-visual-${index + 1}`}>
@@ -166,7 +179,7 @@ function PricingSection({ onSelect, activeServiceId, onServiceChange }) {
     </div>
     <div className="pricing-policy"><span className="section-label">PLEASE REVIEW BEFORE BOOKING</span><h3>Pricing Policy</h3><ul>{pricingNotes.map(note => <li key={note}><Check size={15}/>{note}</li>)}</ul></div>
     <div className="pricing-consultation"><span className="section-label">WE’RE HERE TO HELP</span><h3>Not Sure Which Plan Is Right for You?</h3><p>Tell us about your business, and we’ll recommend the right solution according to your requirements and budget.</p><div><button className="btn primary" type="button" onClick={() => onSelect({ name: 'Custom project / quote' }, { name: 'Project discussion', price: null, billing: 'custom' })}>Discuss Your Project <ArrowUpRight size={16}/></button><button className="btn secondary" type="button" onClick={() => onSelect({ name: 'Free consultation' }, { name: 'Free consultation', price: null, billing: 'custom' })}>Get a Free Consultation</button></div></div>
-    <div className="pricing-faq"><div className="section-label">PRICING FAQ</div><h3>Good to know.</h3><div className="faq-grid">{pricingFaqs.map(item => <article className="faq-item" key={item.question}><h4>{item.question}</h4><p>{item.answer}</p></article>)}</div></div>
+    <div className="pricing-faq"><div className="section-label">PRICING FAQ</div><h3>Good to know.</h3><div className="faq-grid">{pricingFaqs.map(item => <details className="faq-item" key={item.question}><summary><span>{item.question}</span><ChevronRight size={17}/></summary><p>{item.answer}</p></details>)}</div></div>
   </section>
 }
 
@@ -232,6 +245,8 @@ function PortfolioApp() {
   const filtered = useMemo(() => active === 'All' ? projects : projects.filter(p => p.category === active), [active])
   const [activeSection, setActiveSection] = useState('home')
   const [activePricingService, setActivePricingService] = useState(services[0].id)
+  const [scrollProgress, setScrollProgress] = useState(0)
+  const [showBackToTop, setShowBackToTop] = useState(false)
   const reduceMotion = useReducedMotion()
   const nav = [['Home', '#home'], ['About', '#about'], ['Services', '#services'], ['Projects', '#projects'], ['Templates', '/templates'], ['Pricing', '#pricing'], ['Contact', '#contact']]
   useEffect(() => {
@@ -246,6 +261,27 @@ function PortfolioApp() {
     }, { rootMargin: '-20% 0px -65% 0px', threshold: [0, 0.1, 0.25, 0.5] })
     sections.forEach(section => observer.observe(section))
     return () => observer.disconnect()
+  }, [])
+  useEffect(() => {
+    let frame = 0
+    const updateScrollState = () => {
+      if (frame) return
+      frame = window.requestAnimationFrame(() => {
+        frame = 0
+        const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
+        setScrollProgress(scrollableHeight > 0 ? (window.scrollY / scrollableHeight) * 100 : 0)
+        setShowBackToTop(window.scrollY > 560)
+      })
+    }
+
+    window.addEventListener('scroll', updateScrollState, { passive: true })
+    window.addEventListener('resize', updateScrollState)
+    updateScrollState()
+    return () => {
+      window.removeEventListener('scroll', updateScrollState)
+      window.removeEventListener('resize', updateScrollState)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
   }, [])
   const update = e => setForm(current => ({ ...current, [e.target.name]: e.target.value, ...(e.target.name === 'type' ? { package: '', selectedPrice: '' } : {}) }))
   const selectPackage = (service, item) => {
@@ -297,6 +333,7 @@ function PortfolioApp() {
     setSent(true)
   }
   return <div className="site-shell">
+    <ScrollProgress value={scrollProgress}/>
     <PageIntro/>
     <header className="header">
       <a className="brand" href="#home" aria-label="CodePixel home"><img className="brand-logo" src="/images/codepixel-logo.png" alt="CodePixel — Build, Innovate, Grow"/></a>
@@ -315,12 +352,13 @@ function PortfolioApp() {
       <section className="hero section" id="home">
         <div className="hero-copy">
           <div className="eyebrow"><span className="live-dot"/> AVAILABLE FOR SELECT PROJECTS</div>
-          <motion.h1 initial="hidden" animate="visible" variants={{ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : .12, delayChildren: reduceMotion ? 0 : .35 } } }}>
-            {['Building Digital', 'Experiences That'].map(line => <motion.span className="hero-title-line" key={line} variants={{ hidden: { opacity: 0, y: reduceMotion ? 0 : 22 }, visible: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : .5 } } }}>{line}</motion.span>)}
-            <motion.span className="hero-title-line hero-title-highlight" variants={{ hidden: { opacity: 0, y: reduceMotion ? 0 : 22 }, visible: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : .5 } } }}>Drive Business.</motion.span>
+          <motion.h1 initial="hidden" animate="visible" variants={{ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : .12, delayChildren: reduceMotion ? 0 : .2 } } }}>
+            {['We Build Digital', 'Experiences That', 'Move Businesses', 'Forward.'].map((line, lineIndex) => <motion.span className={`hero-title-line${lineIndex === 3 ? ' hero-title-highlight' : ''}`} key={line} variants={{ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : .12, delayChildren: reduceMotion ? 0 : lineIndex * .055 } } }}>
+              {line.split(' ').map((word, wordIndex, words) => <React.Fragment key={`${word}-${wordIndex}`}><motion.span className="hero-title-word" variants={{ hidden: { opacity: 0, y: reduceMotion ? 0 : 18 }, visible: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : .42, ease: [0.22, 1, 0.36, 1] } } }}>{word}</motion.span>{wordIndex < words.length - 1 ? ' ' : null}</React.Fragment>)}
+            </motion.span>)}
           </motion.h1>
-          <p className="hero-text">CodePixel is your technology partner for modern websites, intelligent web applications, e-commerce platforms and innovative software solutions.</p>
-          <motion.div className="hero-actions" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reduceMotion ? 0 : .62, duration: reduceMotion ? 0 : .4 }}><a className="btn primary" href="#projects">Explore my work <ArrowUpRight size={17}/></a><a className="btn secondary" href="#contact">Let’s work together</a></motion.div>
+          <p className="hero-text">From powerful websites to intelligent applications, we transform ambitious ideas into meaningful digital experiences.</p>
+          <motion.div className="hero-actions" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reduceMotion ? 0 : .76, duration: reduceMotion ? 0 : .4 }}><a className="btn primary" href="#contact">Start a Project <ArrowUpRight size={17}/></a><a className="btn secondary" href="#projects">Explore Our Work</a></motion.div>
           <div className="hero-note"><span className="hero-note-line"/><span>Build. Innovate. Grow.</span></div>
         </div>
         <div className="hero-art" aria-label="Abstract digital product illustration">
@@ -343,12 +381,12 @@ function PortfolioApp() {
         <div className="about-grid">
           <Reveal className="about-visual" delay={0.05}><div className="about-visual-frame"><span className="about-visual-label"><Sparkles size={14}/> DIGITAL CRAFT / 01</span><img src="/images/codepixel-about-illustration.svg" alt="Illustration of the CodePixel process: discovering a need, designing an experience, and building a digital product" loading="lazy" decoding="async" width="1417" height="768"/><span className="about-visual-orbit orbit-a"/><span className="about-visual-orbit orbit-b"/></div><div className="about-visual-caption"><span><Atom size={16}/> Ideas into interfaces</span><span className="caption-pixels"><i/><i/><i/></span></div></Reveal>
           <Reveal className="about-editorial"><span className="about-mark">“</span><p className="lead">We bring product thinking and full-stack development together to make digital work feel effortless.</p><p className="muted">From the first conversation through launch, CodePixel focuses on understanding the real problem, making thoughtful choices and delivering software that’s useful, reliable and ready to grow.</p><a className="text-link" href="#contact">Tell us about your project <ArrowUpRight size={16}/></a></Reveal>
-          <Reveal className="about-panel" delay={0.12}><div className="about-panel-top"><span>HOW WE THINK ABOUT THE WORK</span><Sparkles size={18}/></div><div className="approach-list"><div><span>01</span><p><strong>Start with people</strong><small>Understand the users and the everyday need.</small></p></div><div><span>02</span><p><strong>Keep it considered</strong><small>Make the useful path clear and intuitive.</small></p></div><div><span>03</span><p><strong>Build for what’s next</strong><small>Choose dependable foundations that can evolve.</small></p></div></div><div className="stats-row"><div><strong>{String(projects.length).padStart(2, '0')}</strong><span>PROJECT SHOWCASES</span></div><div><strong>01—06</strong><span>BUILD PROCESS</span></div><div><strong>FULL</strong><span>STACK DELIVERY</span></div></div></Reveal>
+          <Reveal className="about-panel" delay={0.12}><div className="about-panel-top"><span>HOW WE THINK ABOUT THE WORK</span><Sparkles size={18}/></div><div className="approach-list"><div><span>01</span><p><strong>Start with people</strong><small>Understand the users and the everyday need.</small></p></div><div><span>02</span><p><strong>Keep it considered</strong><small>Make the useful path clear and intuitive.</small></p></div><div><span>03</span><p><strong>Build for what’s next</strong><small>Choose dependable foundations that can evolve.</small></p></div></div><div className="stats-row"><div><strong>{String(projects.length).padStart(2, '0')}</strong><span>PROJECT SHOWCASES</span></div><div><strong>{String(services.length).padStart(2, '0')}</strong><span>SERVICES</span></div><div><strong>{String(skills.length).padStart(2, '0')}</strong><span>TECHNOLOGIES</span></div></div></Reveal>
         </div>
       </section>
 
       <section className="section services-section" id="services">
-        <SectionHeading number="02" eyebrow="WHAT I CAN HELP WITH" title="One thoughtful partner," highlight="many ways to build." description="From a first web presence to the systems behind your business, get the right level of development support."/>
+        <SectionHeading number="02" eyebrow="WHAT WE CAN HELP WITH" title="One thoughtful partner," highlight="many ways to build." description="From a first web presence to the systems behind your business, get the right level of development support."/>
         <div className="service-grid">{services.map((service, index) => {
           const ServiceIcon = [Globe2, Layers3, ShoppingCart, Database, LayoutDashboard, Wrench][index]
           const servicePricing = pricingCategories.find(category => category.id === service.id)
@@ -408,7 +446,7 @@ function PortfolioApp() {
       </section>
 
       <section className="contact-section" id="contact">
-        <div className="section contact-inner"><div className="contact-copy"><div className="section-label"><span>09</span> LET’S MAKE SOMETHING USEFUL</div><h2>Let’s build<br/><span>something great.</span></h2><p>Tell us what you have in mind. We can work out the right scope, timeline and next step together.</p><div className="contact-links"><a href={`mailto:${CONTACT_EMAIL}`}><Mail size={17}/> {CONTACT_EMAIL}</a><a href={whatsappUrl('Hi, I would like to discuss a project.')} target="_blank" rel="noreferrer"><MessageCircle size={17}/> Start a WhatsApp chat <ArrowUpRight size={14}/></a></div><div className="social-links"><a href="https://github.com/" aria-label="GitHub profile"><Github size={18}/></a><a href="https://linkedin.com/" aria-label="LinkedIn profile"><Linkedin size={18}/></a></div></div>
+        <div className="section contact-inner"><div className="contact-copy"><div className="section-label"><span>09</span> LET’S MAKE SOMETHING USEFUL</div><h2>Have an Idea?<br/>Let’s Build Something<br/><span>Extraordinary.</span></h2><p>Tell us what you have in mind. We can work out the right scope, timeline and next step together.</p><div className="contact-links"><a href={`mailto:${CONTACT_EMAIL}`}><Mail size={17}/> {CONTACT_EMAIL}</a><a href={whatsappUrl('Hi, I would like to discuss a project.')} target="_blank" rel="noreferrer"><MessageCircle size={17}/> Start a WhatsApp chat <ArrowUpRight size={14}/></a></div><div className="social-links"><a href="https://github.com/" aria-label="GitHub profile"><Github size={18}/></a><a href="https://linkedin.com/" aria-label="LinkedIn profile"><Linkedin size={18}/></a></div></div>
           <form className="contact-form" onSubmit={submit} id="project-inquiry-form"><div className="form-title"><span>START A CONVERSATION</span><ArrowUpRight size={18}/></div>
             <label>Your name<input name="name" value={form.name} onChange={update} placeholder="Jane Smith" required/></label>
             <label>Email address<input name="email" type="email" value={form.email} onChange={update} placeholder="you@company.com" required/></label>
@@ -431,6 +469,17 @@ function PortfolioApp() {
       <div className="footer-links"><span>GET IN TOUCH</span><a href="#contact">Start a project <ArrowUpRight size={14}/></a><a href={`mailto:${CONTACT_EMAIL}`}><Mail size={14}/>{CONTACT_EMAIL}</a><a href={whatsappUrl('Hi, I would like to discuss a project.')} target="_blank" rel="noreferrer"><MessageCircle size={14}/> WhatsApp <ArrowUpRight size={13}/></a></div>
       <div className="footer-bottom"><span>© {new Date().getFullYear()} CodePixel. Build. Innovate. Grow.</span><a className="footer-top" href="#home">Back to top ↑</a></div>
     </footer>
+
+    <AnimatePresence>{showBackToTop && <motion.button
+      className="back-to-top"
+      type="button"
+      aria-label="Back to top"
+      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
+      transition={{ duration: reduceMotion ? 0 : .2 }}
+      onClick={() => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })}
+    ><ArrowUpRight size={18}/></motion.button>}</AnimatePresence>
 
     <AnimatePresence>{selected && <motion.div className="modal-backdrop" role="presentation" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.2 }} onClick={() => setSelected(null)}><motion.div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" initial={{ y: reduceMotion ? 0 : 25, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: reduceMotion ? 0 : 25, opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.2 }} onClick={event => event.stopPropagation()}><button className="modal-close" onClick={() => setSelected(null)} aria-label="Close project details"><X/></button><ProjectVisual type={selected.visual} image={selected.image} title={selected.title}/><div className="modal-content"><span className="section-label">{selected.category} / {selected.status}</span><h2 id="modal-title">{selected.title}</h2><p>{selected.details}</p>{selected.stack.length > 0 && <><h4>Technology stack</h4><div className="tag-list">{selected.stack.map(tech => <span key={tech}>{tech}</span>)}</div></>}{selected.highlights?.length > 0 && <><h4>Project highlights</h4><div className="tag-list">{selected.highlights.map(highlight => <span key={highlight}>{highlight}</span>)}</div></>}<div className="outcome"><b>Project focus</b><p>{selected.outcome}</p></div><div className="modal-actions">{selected.url && <a className="btn primary" href={selected.url} target="_blank" rel="noreferrer">Visit live website <ExternalLink size={15}/></a>}<a className="btn secondary" href="#contact" onClick={() => setSelected(null)}>Discuss a similar project <ArrowUpRight size={16}/></a></div></div></motion.div></motion.div>}</AnimatePresence>
     <AnimatePresence>{serviceDetail && <ServiceDetails service={serviceDetail} onClose={() => setServiceDetail(null)} onViewPackages={viewServicePackages}/>}</AnimatePresence>
